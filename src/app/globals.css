@@ -1,26 +1,75 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf8f5;
+  --foreground: #141c18;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  --font-sans: var(--font-plus-jakarta), var(--font-inter), system-ui, sans-serif;
+  --font-inter: var(--font-inter), sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Luxury Islamic Syariah Palette */
+  --color-royal-950: #022c22;
+  --color-royal-900: #064e3b;
+  --color-royal-800: #065f46;
+  --color-royal-700: #047857;
+  --color-royal-50: #f0fdf4;
+
+  --color-gold-900: #78581a;
+  --color-gold-800: #9a7327;
+  --color-gold-700: #b58d3c;
+  --color-gold-600: #c5a059;
+  --color-gold-500: #d4af37;
+  --color-gold-100: #f7f1e1;
+  --color-gold-50: #fbf8f0;
+
+  --color-pearl-bg: #faf8f5;
+  --color-pearl-surface: #ffffff;
+  --color-pearl-muted: #f3efe9;
+  --color-pearl-border: #e9e3d8;
+
+  --color-primary: #064e3b;
+  --color-primary-container: #0d5c3a;
+  --color-on-primary: #ffffff;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Luxury Islamic Design Utility Classes */
+.card-luxury {
+  background: #ffffff;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  box-shadow: 0 10px 30px -8px rgba(6, 78, 59, 0.05), 0 4px 12px -2px rgba(197, 160, 89, 0.08);
+}
+
+.card-luxury-emerald {
+  background: linear-gradient(145deg, #064e3b 0%, #033526 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 16px 36px -10px rgba(6, 78, 59, 0.35), 0 4px 16px -2px rgba(212, 175, 55, 0.2);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #b58d3c 0%, #d4af37 50%, #9a7327 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border-glow {
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 0 15px -3px rgba(212, 175, 55, 0.25);
+}
+
+.pb-safe {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.5rem);
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
 }
