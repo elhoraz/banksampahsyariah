@@ -18,6 +18,15 @@ export const metadata: Metadata = {
   title: 'Bank Sampah Syariah (BSS) UINSA',
   description:
     'Sistem Manajemen dan Rekapitulasi Bank Sampah Syariah UIN Sunan Ampel Surabaya',
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png' },
+    ],
+  },
 };
 
 export default function RootLayout({
