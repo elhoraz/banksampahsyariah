@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import type { Profile, Balance, Transaction, WasteCategory } from '@/types/database';
 import { formatRupiah, formatWeight } from '@/lib/utils';
@@ -313,10 +314,21 @@ export default function NasabahDashboardPage() {
                     </div>
                   </div>
 
-                  <span className="px-3 py-1 rounded-full bg-black/25 text-[#D4AF37] text-[10px] font-bold border border-[#D4AF37]/40 flex items-center gap-1 backdrop-blur-md">
-                    <TrendingUp className="w-3 h-3 text-[#D4AF37]" />
-                    Bebas Riba &amp; Halal
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="hidden sm:flex px-3 py-1 rounded-full bg-black/25 text-[#D4AF37] text-[10px] font-bold border border-[#D4AF37]/40 items-center gap-1 backdrop-blur-md">
+                      <TrendingUp className="w-3 h-3 text-[#D4AF37]" />
+                      Bebas Riba &amp; Halal
+                    </span>
+                    <div className="w-9 h-9 rounded-full overflow-hidden border border-[#D4AF37]/70 shadow-md shrink-0 bg-amber-50 p-0.5">
+                      <Image
+                        src="/logo.png"
+                        alt="Logo BSS"
+                        width={36}
+                        height={36}
+                        className="w-full h-full object-cover rounded-full"
+                      />
+                    </div>
+                  </div>
                 </div>
 
                 <div className="flex items-baseline gap-3 my-4">
@@ -1039,7 +1051,16 @@ export default function NasabahDashboardPage() {
             </div>
 
             <div className="p-5 space-y-4 text-xs font-mono">
-              <div className="text-center space-y-0.5 pb-3 border-b border-dashed border-[#D4AF37]/40">
+              <div className="text-center space-y-1 pb-3 border-b border-dashed border-[#D4AF37]/40">
+                <div className="w-12 h-12 rounded-full overflow-hidden mx-auto mb-1 border border-[#D4AF37]/60 shadow-xs bg-amber-50 p-0.5">
+                  <Image
+                    src="/logo.png"
+                    alt="Logo BSS"
+                    width={48}
+                    height={48}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
                 <div className="font-black text-sm text-[#064E3B]">
                   BANK SAMPAH SYARIAH
                 </div>

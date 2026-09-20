@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useTransition, useMemo } from 'react';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import type { Profile, WasteCategory, Balance } from '@/types/database';
 import { CustomerSelector } from '@/components/modules/petugas/CustomerSelector';
@@ -741,6 +742,15 @@ export default function PetugasPage() {
             <div className="p-6 space-y-4 overflow-y-auto font-mono text-xs text-stone-800">
               {/* Slip Header */}
               <div className="text-center space-y-1 pb-3 border-b-2 border-dashed border-[#D4AF37]/40">
+                <div className="w-12 h-12 rounded-full overflow-hidden mx-auto mb-1.5 border border-[#D4AF37]/60 shadow-xs bg-amber-50 p-0.5">
+                  <Image
+                    src="/logo.png"
+                    alt="Logo BSS"
+                    width={48}
+                    height={48}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
                 <div className="font-black text-sm text-[#064E3B] tracking-wider">
                   BANK SAMPAH SYARIAH (BSS)
                 </div>
@@ -904,6 +914,15 @@ export default function PetugasPage() {
 
             <div className="p-6 space-y-4 overflow-y-auto text-xs font-mono">
               <div className="text-center space-y-1 pb-3 border-b-2 border-dashed border-[#D4AF37]/40">
+                <div className="w-12 h-12 rounded-full overflow-hidden mx-auto mb-1.5 border border-[#D4AF37]/60 shadow-xs bg-amber-50 p-0.5">
+                  <Image
+                    src="/logo.png"
+                    alt="Logo BSS"
+                    width={48}
+                    height={48}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
                 <div className="font-black text-sm text-[#064E3B]">BERITA ACARA TUTUP BUKU LAYANAN</div>
                 <div className="text-[10px] text-stone-500">BANK SAMPAH SYARIAH UINSA</div>
                 <div className="text-[9px] text-stone-400">

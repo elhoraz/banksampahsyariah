@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   ArrowRight,
   Scale,
@@ -89,8 +90,15 @@ export default function HomePage() {
       {/* Top Navbar */}
       <header className="relative z-20 max-w-6xl mx-auto w-full px-4 sm:px-8 py-5 flex items-center justify-between border-b border-amber-900/5">
         <div className="flex items-center gap-3.5">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#064E3B] via-[#085842] to-[#022C22] text-[#D4AF37] flex items-center justify-center shadow-md shadow-emerald-950/15 border border-amber-300/30">
-            <Recycle className="w-6 h-6 stroke-[2.2]" />
+          <div className="w-11 h-11 rounded-full overflow-hidden shadow-md shadow-emerald-950/20 border-2 border-[#D4AF37]/60 bg-amber-50 p-0.5 shrink-0 hover:scale-105 transition-transform">
+            <Image
+              src="/logo.png"
+              alt="Logo Bank Sampah Syariah UIN Sunan Ampel"
+              width={44}
+              height={44}
+              className="w-full h-full object-cover rounded-full"
+              priority
+            />
           </div>
           <div>
             <div className="font-extrabold text-base sm:text-lg tracking-tight text-[#064E3B] flex items-center gap-2">
@@ -380,8 +388,14 @@ export default function HomePage() {
       <footer className="relative z-10 border-t border-amber-900/10 bg-white/70 backdrop-blur-md py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-lg bg-[#064E3B] text-[#D4AF37] flex items-center justify-center text-xs font-bold">
-              B
+            <div className="w-8 h-8 rounded-full overflow-hidden border border-[#D4AF37]/60 shadow-xs shrink-0 bg-amber-50 p-0.5">
+              <Image
+                src="/logo.png"
+                alt="Logo BSS UINSA"
+                width={32}
+                height={32}
+                className="w-full h-full object-cover rounded-full"
+              />
             </div>
             <span>
               Bank Sampah Syariah • Universitas Islam Negeri Sunan Ampel Surabaya

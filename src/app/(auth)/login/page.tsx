@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/client';
 import { loginAction, quickLoginAction } from './actions';
 import {
@@ -197,8 +198,15 @@ export default function LoginPage() {
       <div className="w-full max-w-md space-y-5 relative z-10">
         {/* Brand Header */}
         <div className="text-center space-y-2.5">
-          <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-[#064E3B] via-[#095843] to-[#022C22] text-[#D4AF37] flex items-center justify-center mx-auto shadow-lg shadow-emerald-950/15 border border-[#D4AF37]/35">
-            <Recycle className="w-9 h-9 stroke-[2.2]" />
+          <div className="w-20 h-20 rounded-full overflow-hidden mx-auto shadow-xl shadow-emerald-950/20 border-2 border-[#D4AF37]/60 p-0.5 bg-amber-50">
+            <Image
+              src="/logo.png"
+              alt="Logo Bank Sampah Syariah UIN Sunan Ampel"
+              width={80}
+              height={80}
+              className="w-full h-full object-cover rounded-full"
+              priority
+            />
           </div>
           <div>
             <h1 className="text-2xl font-extrabold text-stone-900 tracking-tight">

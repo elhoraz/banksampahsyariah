@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { MobileBottomNav } from '@/components/navigation/MobileBottomNav';
 import { createClient } from '@/lib/supabase/client';
@@ -161,8 +162,14 @@ export default function DashboardLayout({
         <div className="max-w-6xl mx-auto h-16 px-4 flex items-center justify-between gap-3">
           {/* Logo & Brand Title */}
           <Link href="/" className="flex items-center gap-2.5 min-w-0 group">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#064E3B] via-[#085842] to-[#022C22] text-[#D4AF37] flex items-center justify-center shadow-md shadow-emerald-950/15 border border-[#D4AF37]/40 shrink-0 group-hover:scale-105 transition-transform">
-              <Recycle className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-full overflow-hidden shadow-md shadow-emerald-950/20 border-2 border-[#D4AF37]/60 p-0.5 bg-amber-50 shrink-0 group-hover:scale-105 transition-transform flex items-center justify-center">
+              <Image
+                src="/logo.png"
+                alt="Logo Bank Sampah Syariah UIN Sunan Ampel"
+                width={40}
+                height={40}
+                className="w-full h-full object-cover rounded-full"
+              />
             </div>
             <div className="min-w-0">
               <div className="font-extrabold text-sm sm:text-base text-[#064E3B] tracking-tight leading-tight flex items-center gap-1.5">
