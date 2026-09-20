@@ -64,6 +64,11 @@ class SoundManager {
     }
   }
 
+  // Alias for playSuccessChime
+  playSuccessTone() {
+    this.playSuccessChime();
+  }
+
   // Soft tactile click for buttons and quick chips
   playClickTone() {
     try {

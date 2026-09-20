@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/client';
 import type { Profile, Balance, Transaction, WasteCategory } from '@/types/database';
 import { formatRupiah, formatWeight } from '@/lib/utils';
 import { soundManager } from '@/lib/audio';
+import { useToast } from '@/context/ToastContext';
 import {
   Scale,
   Receipt,
@@ -63,6 +64,14 @@ export default function NasabahDashboardPage() {
   const [isJemputModalOpen, setIsJemputModalOpen] = useState(false);
   const [isKatalogModalOpen, setIsKatalogModalOpen] = useState(false);
   const [isPanduanModalOpen, setIsPanduanModalOpen] = useState(false);
+
+  // Infaq & Jemput Form States
+  const [selectedInfaqProgram, setSelectedInfaqProgram] = useState('Wakaf Sumur Kampus');
+  const [infaqAmount, setInfaqAmount] = useState('25000');
+  const [jemputLocation, setJemputLocation] = useState('');
+  const [jemputWeight, setJemputWeight] = useState('');
+
+  const { toast } = useToast();
 
   // Riwayat Tab Filters
   const [historySearch, setHistorySearch] = useState('');
@@ -903,6 +912,8 @@ export default function NasabahDashboardPage() {
                 <label className="font-bold text-stone-700">Lokasi Penjemputan Kampus</label>
                 <input
                   type="text"
+                  value={jemputLocation}
+                  onChange={(e) => setJemputLocation(e.target.value)}
                   placeholder="Contoh: Gd. FST Lt. 3 / Sekretariat HIMA"
                   className="w-full mt-1 p-2.5 rounded-xl border border-stone-200 bg-white text-xs focus:outline-none focus:ring-2 focus:ring-[#064E3B]"
                 />
@@ -911,6 +922,8 @@ export default function NasabahDashboardPage() {
                 <label className="font-bold text-stone-700">Estimasi Bobot Sampah (kg)</label>
                 <input
                   type="number"
+                  value={jemputWeight}
+                  onChange={(e) => setJemputWeight(e.target.value)}
                   placeholder="Minimal 10 kg"
                   className="w-full mt-1 p-2.5 rounded-xl border border-stone-200 bg-white text-xs focus:outline-none focus:ring-2 focus:ring-[#064E3B]"
                 />
@@ -919,7 +932,11 @@ export default function NasabahDashboardPage() {
             <button
               type="button"
               onClick={() => {
-                alert('Permohonan penjemputan berhasil dikirim ke armada BSS UINSA!');
+                soundManager.playSuccessTone();
+                toast.success(
+                  `Permohonan penjemputan armada BSS UINSA untuk estimasi ${jemputWeight || '15'} kg di ${jemputLocation || 'Lokasi Kampus'} berhasil didaftarkan! Petugas akan segera menghubungi Anda.`,
+                  'Permohonan Dijadwalkan'
+                );
                 setIsJemputModalOpen(false);
               }}
               className="w-full py-2.5 rounded-xl bg-[#064E3B] hover:bg-[#022C22] text-[#F7F2E7] font-bold text-xs border border-[#D4AF37]/40 transition-all active:scale-95"
@@ -946,24 +963,61 @@ export default function NasabahDashboardPage() {
             <div className="p-3 bg-white rounded-2xl border border-[#D4AF37]/30 text-xs text-[#064E3B]">
               Saldo tabungan wadiah tersedia: <strong>{formatRupiah(currentBalAmount)}</strong>
             </div>
-            <div className="space-y-2 text-xs">
-              <label className="font-bold text-stone-700">Pilih Program Penyaluran Berkah:</label>
-              <div className="grid grid-cols-2 gap-2">
-                {['Wakaf Sumur Kampus', 'Infaq Dhuafa Sivitas', 'Beasiswa Lingkungan', 'Sedekah Pohon Kampus'].map((prog) => (
-                  <button
-                    key={prog}
-                    type="button"
-                    className="p-2.5 rounded-xl border border-stone-200 bg-white text-left font-semibold text-xs hover:border-[#D4AF37] hover:bg-[#FAF8F5] transition-all"
-                  >
-                    {prog}
-                  </button>
-                ))}
+            <div className="space-y-3 text-xs">
+              <div>
+                <label className="font-bold text-stone-700">Pilih Program Penyaluran Berkah:</label>
+                <div className="grid grid-cols-2 gap-2 mt-1.5">
+                  {['Wakaf Sumur Kampus', 'Infaq Dhuafa Sivitas', 'Beasiswa Lingkungan', 'Sedekah Pohon Kampus'].map((prog) => {
+                    const isSelected = selectedInfaqProgram === prog;
+                    return (
+                      <button
+                        key={prog}
+                        type="button"
+                        onClick={() => {
+                          soundManager.playClickTone();
+                          setSelectedInfaqProgram(prog);
+                        }}
+                        className={`p-2.5 rounded-xl border text-left font-semibold text-xs transition-all ${
+                          isSelected
+                            ? 'border-[#C5A059] bg-[#FBF8F0] text-[#064E3B] ring-2 ring-[#D4AF37]/30 font-bold'
+                            : 'border-stone-200 bg-white hover:border-[#D4AF37] text-stone-700'
+                        }`}
+                      >
+                        {prog}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div>
+                <label className="font-bold text-stone-700">Nominal Infaq Disalurkan (Rp):</label>
+                <div className="flex gap-2 mt-1.5">
+                  {['10000', '25000', '50000'].map((nom) => (
+                    <button
+                      key={nom}
+                      type="button"
+                      onClick={() => setInfaqAmount(nom)}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all ${
+                        infaqAmount === nom
+                          ? 'bg-[#064E3B] text-white border-[#064E3B]'
+                          : 'bg-white border-stone-200 text-stone-700 hover:bg-stone-50'
+                      }`}
+                    >
+                      {formatRupiah(Number(nom))}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
             <button
               type="button"
               onClick={() => {
-                alert('Penyaluran infaq berhasil disahkan melalui kasir bendahara syariah!');
+                soundManager.playSuccessTone();
+                toast.success(
+                  `Penyaluran infaq berkah sebesar ${formatRupiah(Number(infaqAmount) || 25000)} untuk "${selectedInfaqProgram}" berhasil disahkan melalui kasir bendahara syariah! Jazakumullah khairan katsiran.`,
+                  'Infaq Berkah Disalurkan'
+                );
                 setIsInfaqModalOpen(false);
               }}
               className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#064E3B] to-[#022C22] hover:brightness-110 text-[#F7F2E7] font-bold text-xs border border-[#D4AF37]/40 transition-all active:scale-95"

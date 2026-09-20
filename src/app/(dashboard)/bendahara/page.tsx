@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { soundManager } from '@/lib/audio';
 import { getBendaharaData } from '@/lib/data-actions';
+import { useToast } from '@/context/ToastContext';
 
 interface ExtendedTransaction extends Transaction {
   customer?: Profile;
@@ -53,6 +54,7 @@ const CATEGORY_COLORS = [
 ];
 
 export default function BendaharaPage() {
+  const { toast } = useToast();
   const [supabase] = useState(() => createClient());
 
   // Tab State: 'rekap' | 'jurnal' | 'rekonsiliasi'
@@ -227,7 +229,7 @@ export default function BendaharaPage() {
   // Export to CSV Functionality (UTF-8 BOM)
   const handleExportCSV = () => {
     if (filteredTransactions.length === 0) {
-      alert('Tidak ada data transaksi untuk diekspor.');
+      toast.warning('Tidak ada data transaksi untuk diekspor pada filter ini.', 'Data Transaksi Kosong');
       return;
     }
 
@@ -268,6 +270,7 @@ export default function BendaharaPage() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    toast.success(`Berhasil mengekspor ${filteredTransactions.length} transaksi ke file CSV.`, 'Unduhan Berhasil');
   };
 
   // Submit Reconciliation Action
